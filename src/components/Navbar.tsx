@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Menu, X } from 'lucide-react'
+import {Login}   from './login';
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isLoginVisible, setIsLoginVisible] = useState(false)
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -15,6 +18,7 @@ export const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
   return (
+    <>
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-gray-900 shadow-lg py-3' : 'bg-transparent py-6'}`}
     >
@@ -50,8 +54,11 @@ export const Navbar = () => {
           >
             Testimonials
           </a>
-          <button className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium py-2 px-6 rounded-full hover:shadow-lg hover:scale-105 transition-all duration-300">
-            Get Started
+          <button
+            className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium py-2 px-6 rounded-full hover:shadow-lg hover:scale-105 transition-all duration-300"
+            onClick={() => setIsLoginVisible(true)}
+          >
+            Login
           </button>
         </nav>
         {/* Mobile Menu Button */}
@@ -90,12 +97,31 @@ export const Navbar = () => {
             >
               Testimonials
             </a>
-            <button className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium py-2 px-6 rounded-full hover:shadow-lg transition-all duration-300 w-full">
-              Get Started
+            <button
+              className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium py-2 px-6 rounded-full hover:shadow-lg transition-all duration-300 w-full"
+              onClick={() => setIsLoginVisible(true)}
+            >
+              Login
             </button>
           </div>
         </div>
       )}
     </header>
+
+    {/* Login Page */}
+    {isLoginVisible && (
+      <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
+        <div className="relative">
+          <button
+            className="absolute top-2 right-2 text-white text-xl"
+            onClick={() => setIsLoginVisible(false)}
+          >
+            ✖
+          </button>
+          <Login />
+        </div>
+      </div>
+    )}
+    </>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ChevronRight } from 'lucide-react'
 export const Hero = () => {
   const [isVisible, setIsVisible] = useState(false)
@@ -13,15 +13,9 @@ export const Hero = () => {
       <div className="absolute -bottom-8 left-40 w-72 h-72 bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
-          <div
-            className={`transition-all duration-1000 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-          >
-            <span className="inline-block py-1 px-4 rounded-full bg-indigo-900 text-indigo-300 font-medium text-sm mb-6">
-              Shaping Student Futures
-            </span>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-indigo-300 via-purple-300 to-indigo-300 bg-clip-text text-transparent">
-              Connect, Collaborate, Achieve Your Dreams
-            </h1>
+          <div className={`transition-all duration-1000 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <span className="inline-block py-1 px-4 rounded-full bg-indigo-900 text-indigo-300 font-medium text-sm mb-6">Shaping Student Futures</span>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-indigo-300 via-purple-300 to-indigo-300 bg-clip-text text-transparent">Connect, Collaborate, Achieve Your Dreams</h1>
             <p className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
               Unitex creates pathways for students to achieve their goals by
               connecting like-minded individuals and fostering meaningful
