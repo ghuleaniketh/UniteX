@@ -8,17 +8,17 @@ const contactMethods = [
     icon: Instagram,
     title: "Instagram",
     description: "Follow us for daily learning tips and community highlights",
-    link: "https://instagram.com/unitex",
+    link: "https://www.instagram.com/unitex.community?igsh=MWdueTIxYXMxMWw4cA==",
     color: "from-pink-500 to-purple-500",
     bgColor: "bg-pink-50"
   },
   {
-    icon: MessageCircle,
-    title: "WhatsApp",
-    description: "Join our WhatsApp group for instant community updates",
-    link: "https://wa.me/1234567890",
-    color: "from-green-500 to-emerald-500",
-    bgColor: "bg-green-50"
+  icon: MessageCircle,
+  title: "WhatsApp",
+  description: "Join our WhatsApp group for instant community updates",
+  link: "https://chat.whatsapp.com/INiaAXpF9F87QhgKSkbMq0?mode=ac_t", // Make sure this works
+  color: "from-green-500 to-emerald-500",
+  bgColor: "bg-green-50"
   },
   {
     icon: Mail,

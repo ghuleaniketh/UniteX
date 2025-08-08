@@ -19,9 +19,13 @@ const GetStartedModal = ({ isOpen, onClose }: GetStartedModalProps) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
     console.log("Form submitted:", formData);
     onClose();
+  };
+
+  const handleGoogleSignIn = () => {
+    // Replace with your Google Auth logic
+    console.log("Sign in with Google clicked");
   };
 
   return (
@@ -36,7 +40,7 @@ const GetStartedModal = ({ isOpen, onClose }: GetStartedModalProps) => {
             exit={{ opacity: 0 }}
             onClick={onClose}
           />
-          
+
           {/* Modal */}
           <motion.div
             className="fixed inset-0 z-50 flex items-center justify-center p-4"
@@ -49,30 +53,30 @@ const GetStartedModal = ({ isOpen, onClose }: GetStartedModalProps) => {
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              transition={{ 
-                type: "spring", 
-                stiffness: 300, 
-                damping: 30 
+              transition={{
+                type: "spring",
+                stiffness: 300,
+                damping: 30
               }}
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
-              <div className="bg-gradient-primary p-6 text-white relative">
+              <div className="bg-gradient-primary p-6 text-white relative text-center">
                 <button
                   onClick={onClose}
                   className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
                 >
                   <X size={24} />
                 </button>
-                <motion.h2 
-                  className="text-2xl font-display font-bold mb-2"
+                <motion.h2
+                  className="text-3xl font-display font-bold mb-2"
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.1 }}
                 >
-                   UNITEX
+                  UNITEX
                 </motion.h2>
-                <motion.p 
+                <motion.p
                   className="text-white/90"
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
@@ -83,8 +87,8 @@ const GetStartedModal = ({ isOpen, onClose }: GetStartedModalProps) => {
               </div>
 
               {/* Form */}
-              <motion.form 
-                onSubmit={handleSubmit} 
+              <motion.form
+                onSubmit={handleSubmit}
                 className="p-6 space-y-4"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -99,7 +103,9 @@ const GetStartedModal = ({ isOpen, onClose }: GetStartedModalProps) => {
                     type="text"
                     placeholder="Enter your full name"
                     value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
                     className="border-2 focus:border-primary transition-colors"
                     required
                   />
@@ -114,7 +120,9 @@ const GetStartedModal = ({ isOpen, onClose }: GetStartedModalProps) => {
                     type="email"
                     placeholder="Enter your email"
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
                     className="border-2 focus:border-primary transition-colors"
                     required
                   />
@@ -129,23 +137,52 @@ const GetStartedModal = ({ isOpen, onClose }: GetStartedModalProps) => {
                     type="text"
                     placeholder="e.g., UI/UX Design, Programming"
                     value={formData.interests}
-                    onChange={(e) => setFormData({ ...formData, interests: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, interests: e.target.value })
+                    }
                     className="border-2 focus:border-primary transition-colors"
                   />
                 </div>
 
-                <motion.div 
+                {/* Start Button */}
+                <motion.div
                   className="pt-4"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <Button 
-                    type="submit" 
+                  <Button
+                    type="submit"
                     className="w-full bg-gradient-primary text-primary-foreground hover:opacity-90 transition-opacity font-semibold py-3 glow-primary"
                   >
                     Start Learning Journey
                   </Button>
                 </motion.div>
+
+                {/* Google Sign-In Button */}
+                {/* Separator */}
+<div className="flex items-center gap-4 py-2">
+  <div className="flex-grow h-px bg-gray-300" />
+  <span className="text-sm text-gray-500 font-medium">OR</span>
+  <div className="flex-grow h-px bg-gray-300" />
+</div>
+
+{/* Google Sign-In Button */}
+<div className="pt-2">
+  <Button
+    type="button"
+    variant="outline"
+    className="w-full flex items-center justify-center gap-2 border-gray-300 text-gray-700 hover:bg-gray-100 transition"
+    onClick={handleGoogleSignIn}
+  >
+    <img
+      src="https://www.svgrepo.com/show/475656/google-color.svg"
+      alt="Google logo"
+      className="h-5 w-5"
+    />
+    Continue with Google
+  </Button>
+</div>
+
               </motion.form>
             </motion.div>
           </motion.div>

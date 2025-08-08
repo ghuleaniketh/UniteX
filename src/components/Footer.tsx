@@ -6,13 +6,13 @@ const Footer = () => {
   const socialLinks = [
     {
       icon: Instagram,
-      href: "https://instagram.com/unitex",
+      href: "https://www.instagram.com/unitex.community?igsh=MWdueTIxYXMxMWw4cA==",
       label: "Instagram",
       color: "hover:text-pink-500"
     },
     {
       icon: MessageCircle,
-      href: "https://wa.me/1234567890",
+      href: "https://chat.whatsapp.com/INiaAXpF9F87QhgKSkbMq0?mode=ac_t",
       label: "WhatsApp",
       color: "hover:text-green-500"
     },
