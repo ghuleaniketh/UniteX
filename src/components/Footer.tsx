@@ -1,134 +1,153 @@
-import React from 'react';
-import { Facebook, Twitter, Instagram, Linkedin, Youtube } from 'lucide-react';
-export const Footer = () => {
-  return <footer
-  className="text-white pt-16 pb-8"
-  style={{
-    background: 'linear-gradient(to bottom, rgba(21, 20, 26, 1) 0%, rgba(8, 2, 19, 1) 25%, rgba(16, 19, 36, 1) 50%, rgba(13, 14, 37, 1) 75%, rgba(24, 29, 56, 1) 100%)'
-  }}
->
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
-          <div className="lg:col-span-2">
-            <div className="text-2xl font-bold bg-gradient-to-r from-indigo-300 to-purple-300 bg-clip-text text-transparent mb-4">
-              Unitex
+import { motion } from "framer-motion";
+import { Instagram, MessageCircle, Mail, Heart } from "lucide-react";
+import logo from "@/assets/unitex-logo.png";
+
+const Footer = () => {
+  const socialLinks = [
+    {
+      icon: Instagram,
+      href: "https://instagram.com/unitex",
+      label: "Instagram",
+      color: "hover:text-pink-500"
+    },
+    {
+      icon: MessageCircle,
+      href: "https://wa.me/1234567890",
+      label: "WhatsApp",
+      color: "hover:text-green-500"
+    },
+    {
+      icon: Mail,
+      href: "mailto:hello@unitex.community",
+      label: "Email",
+      color: "hover:text-blue-500"
+    }
+  ];
+
+  return (
+    <footer className="bg-white border-t border-border">
+      <div className="container mx-auto px-6 py-12">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          {/* Brand Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="space-y-4"
+          >
+            <div className="flex items-center space-x-3">
+              <img src={logo} alt="Unitex" className="h-9 w-auto" />
+              <span className="text-2xl font-display font-bold text-foreground">
+                UNITEX
+              </span>
             </div>
-            <p className="text-indigo-200 mb-6 max-w-md">
-              Connecting students worldwide to help them achieve their academic
-              and career goals through meaningful collaboration.
+            <p className="text-muted-foreground max-w-xs">
+              Empowering learners through community-driven education and 
+              personalized learning experiences.
             </p>
+          </motion.div>
+
+          {/* Quick Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="space-y-4"
+          >
+            <h3 className="text-lg font-display font-semibold text-foreground">
+              Quick Links
+            </h3>
+            <div className="space-y-2">
+              {["Home", "About", "Communities", "Contact"].map((link) => (
+                <button
+                  key={link}
+                  onClick={() => {
+                    const sectionId = link.toLowerCase().replace(/\s+/g, "-").replace("unitex-", "");
+                    const targetId = sectionId === "home" ? "home" : 
+                                   sectionId === "how-works" ? "how-it-works" :
+                                   sectionId === "popular-communities" ? "communities" : "contact";
+                    document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className="block text-muted-foreground hover:text-primary transition-colors duration-200"
+                >
+                  {link}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Social & Contact */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="space-y-4"
+          >
+            <h3 className="text-lg font-display font-semibold text-foreground">
+              Connect With Us
+            </h3>
             <div className="flex space-x-4">
-              <a href="#" className="text-indigo-300 hover:text-white transition-colors duration-300">
-                <Facebook size={20} />
-              </a>
-              <a href="#" className="text-indigo-300 hover:text-white transition-colors duration-300">
-                <Twitter size={20} />
-              </a>
-              <a href="#" className="text-indigo-300 hover:text-white transition-colors duration-300">
-                <Instagram size={20} />
-              </a>
-              <a href="#" className="text-indigo-300 hover:text-white transition-colors duration-300">
-                <Linkedin size={20} />
-              </a>
-              <a href="#" className="text-indigo-300 hover:text-white transition-colors duration-300">
-                <Youtube size={20} />
-              </a>
+              {socialLinks.map((social, index) => {
+                const Icon = social.icon;
+                return (
+                  <motion.a
+                    key={index}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`text-muted-foreground ${social.color} transition-colors duration-200`}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    aria-label={social.label}
+                  >
+                    <Icon size={24} />
+                  </motion.a>
+                );
+              })}
             </div>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Platform</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="#" className="text-indigo-200 hover:text-white transition-colors duration-300">
-                  Features
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-indigo-200 hover:text-white transition-colors duration-300">
-                  How It Works
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-indigo-200 hover:text-white transition-colors duration-300">
-                  Pricing
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-indigo-200 hover:text-white transition-colors duration-300">
-                  FAQ
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Resources</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="#" className="text-indigo-200 hover:text-white transition-colors duration-300">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-indigo-200 hover:text-white transition-colors duration-300">
-                  Guides
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-indigo-200 hover:text-white transition-colors duration-300">
-                  Events
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-indigo-200 hover:text-white transition-colors duration-300">
-                  Community
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Company</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="#" className="text-indigo-200 hover:text-white transition-colors duration-300">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-indigo-200 hover:text-white transition-colors duration-300">
-                  Careers
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-indigo-200 hover:text-white transition-colors duration-300">
-                  Contact
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-indigo-200 hover:text-white transition-colors duration-300">
-                  Partners
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="border-t border-indigo-800 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-indigo-300 text-sm mb-4 md:mb-0">
-              © {new Date().getFullYear()} Unitex. All rights reserved.
+            <p className="text-sm text-muted-foreground">
+              Follow us for daily learning tips and community updates
             </p>
-            <div className="flex space-x-6">
-              <a href="#" className="text-indigo-300 hover:text-white text-sm transition-colors duration-300">
-                Privacy Policy
-              </a>
-              <a href="#" className="text-indigo-300 hover:text-white text-sm transition-colors duration-300">
-                Terms of Service
-              </a>
-              <a href="#" className="text-indigo-300 hover:text-white text-sm transition-colors duration-300">
-                Cookie Policy
-              </a>
-            </div>
-          </div>
+          </motion.div>
         </div>
+
+        {/* Bottom Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0"
+        >
+          <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+            <span>© 2025 Unitex Community – All Rights Reserved</span>
+          </div>
+          
+          <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+            <span>Made with</span>
+            <motion.div
+              animate={{ 
+                scale: [1, 1.2, 1],
+                color: ["#ef4444", "#f97316", "#ef4444"]
+              }}
+              transition={{ 
+                duration: 2,
+                repeat: Infinity,
+                repeatType: "reverse"
+              }}
+            >
+              <Heart size={16} fill="currentColor" />
+            </motion.div>
+            <span>for learners everywhere</span>
+          </div>
+        </motion.div>
       </div>
-    </footer>;
+    </footer>
+  );
 };
+
+export default Footer;

@@ -1,127 +1,123 @@
-import { useEffect, useState } from 'react'
-import { Menu, X } from 'lucide-react'
-import {Login}   from './login';
-export const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isLoginVisible, setIsLoginVisible] = useState(false)
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import logo from "@/assets/unitex-logo.png";
+import { Menu, X } from "lucide-react";
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true)
-      } else {
-        setIsScrolled(false)
-      }
+interface NavbarProps {
+  onGetStarted: () => void;
+}
+
+const Navbar = ({ onGetStarted }: NavbarProps) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      setIsMenuOpen(false); // Close mobile menu on link click
     }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  };
+
   return (
-    <>
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-gray-900 shadow-lg py-3' : 'bg-transparent py-6'}`}
+    <motion.nav
+      className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border"
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6 }}
     >
-      <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
-        <div className="flex items-center">
-          <span className="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-            UniteX
-          </span>
-        </div>
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
-          <a
-            href="#features"
-            className="text-gray-300 hover:text-indigo-400 transition-colors duration-300"
+      <div className="container mx-auto px-6 py-4">
+        <div className="flex items-center justify-between">
+          {/* Logo and Brand */}
+          <motion.div
+            className="flex items-center space-x-2"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.2 }}
           >
-            Features
-          </a>
-          <a
-            href="#how-it-works"
-            className="text-gray-300 hover:text-indigo-400 transition-colors duration-300"
-          >
-            How It Works
-          </a>
-          <a
-            href="#community"
-            className="text-gray-300 hover:text-indigo-400 transition-colors duration-300"
-          >
-            Community
-          </a>
-          <a
-            href="#testimonials"
-            className="text-gray-300 hover:text-indigo-400 transition-colors duration-300"
-          >
-            Testimonials
-          </a>
-          <button
-            className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium py-2 px-6 rounded-full hover:shadow-lg hover:scale-105 transition-all duration-300"
-            onClick={() => setIsLoginVisible(true)}
-          >
-            Login
-          </button>
-        </nav>
-        {/* Mobile Menu Button */}
-        <button
-          className="md:hidden text-gray-300"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-      {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <div className="md:hidden bg-gray-900 absolute top-full left-0 right-0 shadow-lg animate-fade-in">
-          <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-            <a
-              href="#features"
-              className="text-gray-300 hover:text-indigo-400 transition-colors duration-300 py-2"
-            >
-              Features
-            </a>
-            <a
-              href="#how-it-works"
-              className="text-gray-300 hover:text-indigo-400 transition-colors duration-300 py-2"
-            >
-              How It Works
-            </a>
-            <a
-              href="#community"
-              className="text-gray-300 hover:text-indigo-400 transition-colors duration-300 py-2"
-            >
-              Community
-            </a>
-            <a
-              href="#testimonials"
-              className="text-gray-300 hover:text-indigo-400 transition-colors duration-300 py-2"
-            >
-              Testimonials
-            </a>
+            <img src={logo} alt="Unitex" className="h-9 w-auto" />
+            <span className="text-xl font-display font-bold text-foreground">
+              UNITEX
+            </span>
+          </motion.div>
+
+          {/* Desktop Navigation Links */}
+          <div className="hidden md:flex items-center space-x-8">
             <button
-              className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium py-2 px-6 rounded-full hover:shadow-lg transition-all duration-300 w-full"
-              onClick={() => setIsLoginVisible(true)}
+              onClick={() => scrollToSection("home")}
+              className="text-foreground hover:text-primary transition-colors duration-200 font-medium"
             >
-              Login
+              Home
+            </button>
+            <button
+              onClick={() => scrollToSection("how-it-works")}
+              className="text-foreground hover:text-primary transition-colors duration-200 font-medium"
+            >
+              About
+            </button>
+            <button
+              onClick={() => scrollToSection("communities")}
+              className="text-foreground hover:text-primary transition-colors duration-200 font-medium"
+            >
+              Communities
+            </button>
+            <button
+              onClick={() => scrollToSection("contact")}
+              className="text-foreground hover:text-primary transition-colors duration-200 font-medium"
+            >
+              Contact
             </button>
           </div>
-        </div>
-      )}
-    </header>
 
-    {/* Login Page */}
-    {isLoginVisible && (
-      <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
-        <div className="relative">
-          <button
-            className="absolute top-2 right-2 text-white text-xl"
-            onClick={() => setIsLoginVisible(false)}
+          {/* Mobile Menu Toggle */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle Menu"
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+
+          {/* Login Button */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="hidden md:block"
           >
-            ✖
-          </button>
-          <Login />
+            <Button
+              onClick={onGetStarted}
+              className="bg-gradient-primary text-primary-foreground hover:opacity-90 transition-opacity duration-200 font-semibold px-6 py-2 glow-primary"
+            >
+              Login
+            </Button>
+          </motion.div>
         </div>
+
+        {/* Mobile Menu Items */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="md:hidden flex flex-col mt-4 space-y-4"
+            >
+              <button onClick={() => scrollToSection("home")}>Home</button>
+              <button onClick={() => scrollToSection("how-it-works")}>About</button>
+              <button onClick={() => scrollToSection("communities")}>Communities</button>
+              <button onClick={() => scrollToSection("contact")}>Contact</button>
+              <Button
+                onClick={onGetStarted}
+                className="w-fit bg-gradient-primary text-primary-foreground mt-2"
+              >
+                Login
+              </Button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-    )}
-    </>
-  )
-}
+    </motion.nav>
+  );
+};
+
+export default Navbar;
