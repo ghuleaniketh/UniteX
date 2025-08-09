@@ -49,7 +49,7 @@ const GetStartedModal = ({ isOpen, onClose }: GetStartedModalProps) => {
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 overflow-hidden"
+              className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl max-w-md w-full mx-4 overflow-hidden"
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
@@ -61,13 +61,14 @@ const GetStartedModal = ({ isOpen, onClose }: GetStartedModalProps) => {
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
-              <div className="bg-gradient-primary p-6 text-white relative text-center">
+              <div className="bg-gradient-primary p-6 relative text-center text-white">
                 <button
                   onClick={onClose}
                   className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
                 >
                   <X size={24} />
                 </button>
+
                 <motion.h2
                   className="text-3xl font-display font-bold mb-2"
                   initial={{ y: 20, opacity: 0 }}
@@ -89,13 +90,16 @@ const GetStartedModal = ({ isOpen, onClose }: GetStartedModalProps) => {
               {/* Form */}
               <motion.form
                 onSubmit={handleSubmit}
-                className="p-6 space-y-4"
+                className="p-6 space-y-4 bg-white dark:bg-gray-900"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3 }}
               >
                 <div className="space-y-2">
-                  <Label htmlFor="name" className="text-foreground font-medium">
+                  <Label
+                    htmlFor="name"
+                    className="text-foreground dark:text-gray-300 font-medium"
+                  >
                     Full Name
                   </Label>
                   <Input
@@ -106,13 +110,16 @@ const GetStartedModal = ({ isOpen, onClose }: GetStartedModalProps) => {
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
                     }
-                    className="border-2 focus:border-primary transition-colors"
+                    className="border-2 focus:border-primary transition-colors dark:bg-gray-800 dark:text-white"
                     required
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-foreground font-medium">
+                  <Label
+                    htmlFor="email"
+                    className="text-foreground dark:text-gray-300 font-medium"
+                  >
                     Email Address
                   </Label>
                   <Input
@@ -123,13 +130,16 @@ const GetStartedModal = ({ isOpen, onClose }: GetStartedModalProps) => {
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
                     }
-                    className="border-2 focus:border-primary transition-colors"
+                    className="border-2 focus:border-primary transition-colors dark:bg-gray-800 dark:text-white"
                     required
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="interests" className="text-foreground font-medium">
+                  <Label
+                    htmlFor="interests"
+                    className="text-foreground dark:text-gray-300 font-medium"
+                  >
                     Learning Interests
                   </Label>
                   <Input
@@ -140,7 +150,7 @@ const GetStartedModal = ({ isOpen, onClose }: GetStartedModalProps) => {
                     onChange={(e) =>
                       setFormData({ ...formData, interests: e.target.value })
                     }
-                    className="border-2 focus:border-primary transition-colors"
+                    className="border-2 focus:border-primary transition-colors dark:bg-gray-800 dark:text-white"
                   />
                 </div>
 
@@ -158,31 +168,31 @@ const GetStartedModal = ({ isOpen, onClose }: GetStartedModalProps) => {
                   </Button>
                 </motion.div>
 
-                {/* Google Sign-In Button */}
                 {/* Separator */}
-<div className="flex items-center gap-4 py-2">
-  <div className="flex-grow h-px bg-gray-300" />
-  <span className="text-sm text-gray-500 font-medium">OR</span>
-  <div className="flex-grow h-px bg-gray-300" />
-</div>
+                <div className="flex items-center gap-4 py-2">
+                  <div className="flex-grow h-px bg-gray-300 dark:bg-gray-700" />
+                  <span className="text-sm text-gray-500 dark:text-gray-400 font-medium">
+                    OR
+                  </span>
+                  <div className="flex-grow h-px bg-gray-300 dark:bg-gray-700" />
+                </div>
 
-{/* Google Sign-In Button */}
-<div className="pt-2">
-  <Button
-    type="button"
-    variant="outline"
-    className="w-full flex items-center justify-center gap-2 border-gray-300 text-gray-700 hover:bg-gray-100 transition"
-    onClick={handleGoogleSignIn}
-  >
-    <img
-      src="https://www.svgrepo.com/show/475656/google-color.svg"
-      alt="Google logo"
-      className="h-5 w-5"
-    />
-    Continue with Google
-  </Button>
-</div>
-
+                {/* Google Sign-In Button */}
+                <div className="pt-2">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="w-full flex items-center justify-center gap-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+                    onClick={handleGoogleSignIn}
+                  >
+                    <img
+                      src="https://www.svgrepo.com/show/475656/google-color.svg"
+                      alt="Google logo"
+                      className="h-5 w-5"
+                    />
+                    Continue with Google
+                  </Button>
+                </div>
               </motion.form>
             </motion.div>
           </motion.div>

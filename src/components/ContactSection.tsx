@@ -10,15 +10,15 @@ const contactMethods = [
     description: "Follow us for daily learning tips and community highlights",
     link: "https://www.instagram.com/unitex.community?igsh=MWdueTIxYXMxMWw4cA==",
     color: "from-pink-500 to-purple-500",
-    bgColor: "bg-pink-50"
+    bgColor: "bg-pink-50 dark:bg-pink-900/30"
   },
   {
-  icon: MessageCircle,
-  title: "WhatsApp",
-  description: "Join our WhatsApp group for instant community updates",
-  link: "https://chat.whatsapp.com/INiaAXpF9F87QhgKSkbMq0?mode=ac_t", // Make sure this works
-  color: "from-green-500 to-emerald-500",
-  bgColor: "bg-green-50"
+    icon: MessageCircle,
+    title: "WhatsApp",
+    description: "Join our WhatsApp group for instant community updates",
+    link: "https://chat.whatsapp.com/INiaAXpF9F87QhgKSkbMq0?mode=ac_t",
+    color: "from-green-500 to-emerald-500",
+    bgColor: "bg-green-50 dark:bg-green-900/30"
   },
   {
     icon: Mail,
@@ -26,7 +26,7 @@ const contactMethods = [
     description: "Send us your questions and feedback directly",
     link: "mailto:hello@unitex.community",
     color: "from-blue-500 to-cyan-500",
-    bgColor: "bg-blue-50"
+    bgColor: "bg-blue-50 dark:bg-blue-900/30"
   }
 ];
 
@@ -51,15 +51,16 @@ const ContactCard = ({ contact, index }: { contact: typeof contactMethods[0], in
       }}
       className="group block"
     >
-      <div className="bg-white rounded-3xl p-8 border border-border shadow-card hover:shadow-xl transition-all duration-300 group-hover:scale-105 group-hover:border-primary/20 text-center">
+      <div className="bg-white dark:bg-gray-900 rounded-3xl p-8 border border-border shadow-card hover:shadow-xl transition-all duration-300 group-hover:scale-105 group-hover:border-primary/20 text-center">
+        
         {/* Icon */}
         <motion.div
           initial={{ scale: 0, rotate: -90 }}
           animate={isInView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -90 }}
-          transition={{ delay: index * 0.2 + 0.3, type: "spring", stiffness: 200 }}
+          transition={{ delay: index * 0.05, type: "spring", stiffness: 200, damping: 18 }}
           className={`w-20 h-20 ${contact.bgColor} rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}
         >
-           <Icon size={40} className={contact.bgColor} />
+          <Icon size={40} className="text-foreground" />
         </motion.div>
 
         {/* Content */}
@@ -103,6 +104,8 @@ const ContactSection = () => {
   return (
     <section id="contact" className="py-24 bg-muted/30">
       <div className="container mx-auto px-6">
+        
+        {/* Heading */}
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
@@ -110,8 +113,6 @@ const ContactSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-
-
           <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-6">
             Let's{" "}
             <span className="bg-gradient-primary bg-clip-text text-transparent">
@@ -125,6 +126,7 @@ const ContactSection = () => {
           </p>
         </motion.div>
 
+        {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
           {contactMethods.map((contact, index) => (
             <ContactCard key={index} contact={contact} index={index} />
@@ -136,7 +138,7 @@ const ContactSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="text-center mt-16 p-8 bg-white/50 backdrop-blur-sm rounded-2xl border border-border"
+          className="text-center mt-16 p-8 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm rounded-2xl border border-border"
         >
           <h3 className="text-2xl font-display font-bold text-foreground mb-4">
             Join Our Community Today

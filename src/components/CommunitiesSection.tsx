@@ -10,7 +10,7 @@ const communities = [
     description: "Master the art of user experience design, interface creation, and design thinking methodology.",
     members: "2.5K+ Members",
     color: "from-purple-500 to-pink-500",
-    bgColor: "bg-purple-50"
+    bgColor: "bg-purple-50 dark:bg-purple-900/40"
   },
   {
     icon: Code,
@@ -18,7 +18,7 @@ const communities = [
     description: "Build end-to-end applications with modern frameworks, databases, and deployment strategies.",
     members: "3.2K+ Members", 
     color: "from-blue-500 to-cyan-500",
-    bgColor: "bg-blue-50"
+    bgColor: "bg-blue-50 dark:bg-blue-900/40"
   },
   {
     icon: Shield,
@@ -26,7 +26,7 @@ const communities = [
     description: "Protect digital assets and learn ethical hacking, penetration testing, and security protocols.",
     members: "1.8K+ Members",
     color: "from-red-500 to-orange-500", 
-    bgColor: "bg-red-50"
+    bgColor: "bg-red-50 dark:bg-red-900/40"
   },
   {
     icon: Briefcase,
@@ -34,7 +34,7 @@ const communities = [
     description: "Launch your startup, develop business strategies, and connect with fellow entrepreneurs.",
     members: "2.1K+ Members",
     color: "from-green-500 to-emerald-500",
-    bgColor: "bg-green-50"
+    bgColor: "bg-green-50 dark:bg-green-900/40"
   }
 ];
 
@@ -56,21 +56,18 @@ const CommunityCard = ({ community, index }: { community: typeof communities[0],
       }}
       className="group cursor-pointer"
     >
-      <div className="bg-white rounded-3xl p-8 border border-border shadow-card hover:shadow-xl transition-all duration-300 group-hover:scale-105 group-hover:border-primary/20 h-full">
+      <div className="bg-white dark:bg-gray-800 rounded-3xl p-8 border border-border dark:border-gray-700 shadow-card hover:shadow-xl transition-all duration-300 group-hover:scale-105 group-hover:border-primary/20 h-full">
+        
         {/* Icon Header */}
         <div className="relative mb-6">
           <motion.div
             initial={{ scale: 0, rotate: -90 }}
             animate={isInView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -90 }}
-            transition={{ delay: index * 0.15 + 0.3, type: "spring", stiffness: 200 }}
+            transition={{ delay: index * 0.05, type: "spring", stiffness: 500, damping: 18 }}
             className={`w-16 h-16 ${community.bgColor} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
           >
-           
-             <Icon size={32} className="text-black-600" />
-
+            <Icon size={32} className="text-gray-800 dark:text-gray-200" />
           </motion.div>
-          
-
         </div>
 
         {/* Content */}
@@ -78,7 +75,7 @@ const CommunityCard = ({ community, index }: { community: typeof communities[0],
           initial={{ opacity: 0, x: -20 }}
           animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
           transition={{ delay: index * 0.15 + 0.4 }}
-          className="text-2xl font-display font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300"
+          className="text-2xl font-display font-bold text-gray-900 dark:text-white mb-4 group-hover:text-primary transition-colors duration-300"
         >
           {community.title}
         </motion.h3>
@@ -87,7 +84,7 @@ const CommunityCard = ({ community, index }: { community: typeof communities[0],
           initial={{ opacity: 0, x: -20 }}
           animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
           transition={{ delay: index * 0.15 + 0.5 }}
-          className="text-muted-foreground leading-relaxed mb-6"
+          className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6"
         >
           {community.description}
         </motion.p>
@@ -99,7 +96,7 @@ const CommunityCard = ({ community, index }: { community: typeof communities[0],
           transition={{ delay: index * 0.15 + 0.6 }}
           className="flex items-center justify-between"
         >
-          <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+          <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
             <Users size={16} />
             <span>{community.members}</span>
           </div>
@@ -121,7 +118,7 @@ const CommunitiesSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="communities" className="py-24 bg-background">
+    <section id="communities" className="py-24 bg-background dark:bg-gray-900">
       <div className="container mx-auto px-6">
         <motion.div
           ref={ref}
@@ -130,17 +127,14 @@ const CommunitiesSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          
-
-
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-6">
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900 dark:text-white mb-6">
             Find Your{" "}
             <span className="bg-gradient-primary bg-clip-text text-transparent">
               Learning Tribe
             </span>
           </h2>
           
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Join vibrant communities of passionate learners and industry experts. 
             Collaborate, share knowledge, and grow together in your field of interest.
           </p>
@@ -159,14 +153,13 @@ const CommunitiesSection = () => {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="text-center mt-16"
         >
-          <p className="text-lg text-muted-foreground mb-6">
+          <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
             Don't see your field? We're always adding new communities!
           </p>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="inline-flex items-center space-x-2 bg-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-700 transition-all"
-
           >
             <span>Suggest a Community</span>
             <ArrowRight size={20} />

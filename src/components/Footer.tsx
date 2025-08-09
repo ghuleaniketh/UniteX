@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
 import { Instagram, MessageCircle, Mail, Heart } from "lucide-react";
-import logo from "@/assets/unitex-logo.png";
+import { useTheme } from "@/context/ThemeContext";
+import logo from "@/assets/unitex-logo.png"; // same logo used in navbar
 
 const Footer = () => {
+  const { theme } = useTheme();
+
   const socialLinks = [
     {
       icon: Instagram,
@@ -25,7 +28,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-white border-t border-border">
+    <footer className="bg-gray-100 dark:bg-gray-800 border-t border-border">
       <div className="container mx-auto px-6 py-12">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
@@ -38,13 +41,21 @@ const Footer = () => {
             className="space-y-4"
           >
             <div className="flex items-center space-x-3">
-              <img src={logo} alt="Unitex" className="h-9 w-auto" />
+            {/* <img
+              src={logo}
+              alt="Unitex"
+              className={`h-10 w-auto transition-all duration-300 ${
+                theme === "dark"
+                  ? "invert brightness-0" // white logo for dark mode
+                  : "" // black logo for light mode
+              }`}
+            /> */}
               <span className="text-2xl font-display font-bold text-foreground">
                 UNITEX
               </span>
             </div>
             <p className="text-muted-foreground max-w-xs">
-              Empowering learners through community-driven education and 
+              Empowering learners through community-driven education and
               personalized learning experiences.
             </p>
           </motion.div>
@@ -65,11 +76,21 @@ const Footer = () => {
                 <button
                   key={link}
                   onClick={() => {
-                    const sectionId = link.toLowerCase().replace(/\s+/g, "-").replace("unitex-", "");
-                    const targetId = sectionId === "home" ? "home" : 
-                                   sectionId === "how-works" ? "how-it-works" :
-                                   sectionId === "popular-communities" ? "communities" : "contact";
-                    document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth" });
+                    const sectionId = link
+                      .toLowerCase()
+                      .replace(/\s+/g, "-")
+                      .replace("unitex-", "");
+                    const targetId =
+                      sectionId === "home"
+                        ? "home"
+                        : sectionId === "how-works"
+                        ? "how-it-works"
+                        : sectionId === "popular-communities"
+                        ? "communities"
+                        : "contact";
+                    document
+                      .getElementById(targetId)
+                      ?.scrollIntoView({ behavior: "smooth" });
                   }}
                   className="block text-muted-foreground hover:text-primary transition-colors duration-200"
                 >
@@ -126,15 +147,15 @@ const Footer = () => {
           <div className="flex items-center space-x-2 text-sm text-muted-foreground">
             <span>© 2025 Unitex Community – All Rights Reserved</span>
           </div>
-          
+
           <div className="flex items-center space-x-2 text-sm text-muted-foreground">
             <span>Made with</span>
             <motion.div
-              animate={{ 
+              animate={{
                 scale: [1, 1.2, 1],
                 color: ["#ef4444", "#f97316", "#ef4444"]
               }}
-              transition={{ 
+              transition={{
                 duration: 2,
                 repeat: Infinity,
                 repeatType: "reverse"
