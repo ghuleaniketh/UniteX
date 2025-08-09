@@ -66,19 +66,11 @@ const CommunityCard = ({ community, index }: { community: typeof communities[0],
             className={`w-16 h-16 ${community.bgColor} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
           >
            
-             <Icon size={32} className={`bg-gradient-to-r from-pink-500 to-yellow-500 bg-clip-text text-transparent`} />
+             <Icon size={32} className="text-black-600" />
 
           </motion.div>
           
-          {/* Floating indicator */}
-          {/* <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
-            transition={{ delay: index * 0.15 + 0.6 }}
-            className="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center"
-          >
-            <div className="w-2 h-2 bg-white rounded-full"></div>
-          </motion.div> */}
+
         </div>
 
         {/* Content */}
@@ -139,15 +131,7 @@ const CommunitiesSection = () => {
           className="text-center mb-16"
         >
           
-          {/* <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="inline-flex items-center space-x-2 bg-accent/10 rounded-full px-6 py-3 mb-6"
-          >
-            <Users className="text-accent" size={20} />
-            <span className="text-accent font-medium">Popular Communities</span>
-          </motion.div> */}
+
 
           <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-6">
             Find Your{" "}

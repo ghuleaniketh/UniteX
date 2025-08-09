@@ -59,10 +59,7 @@ const ContactCard = ({ contact, index }: { contact: typeof contactMethods[0], in
           transition={{ delay: index * 0.2 + 0.3, type: "spring", stiffness: 200 }}
           className={`w-20 h-20 ${contact.bgColor} rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}
         >
-          <Icon 
-            size={40} 
-            className={`bg-gradient-to-r ${contact.color} bg-clip-text text-transparent`}
-          />
+           <Icon size={40} className={contact.bgColor} />
         </motion.div>
 
         {/* Content */}
@@ -113,15 +110,7 @@ const ContactSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          {/* <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="inline-flex items-center space-x-2 bg-secondary/50 rounded-full px-6 py-3 mb-6"
-          >
-            <MessageCircle className="text-secondary-foreground" size={20} />
-            <span className="text-secondary-foreground font-medium">Get in Touch</span>
-          </motion.div> */}
+
 
           <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-6">
             Let's{" "}
