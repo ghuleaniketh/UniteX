@@ -1,47 +1,77 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import { ThemeProvider, useTheme } from "./context/ThemeContext";
+// src/App.tsx
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from '@/context/AuthContext';
+import { ThemeProvider } from '@/context/ThemeContext'; // Add this import
+import Index from '@/pages/Index';
+import Home from '@/pages/home';
+import NotFound from '@/pages/NotFound';
 
-const queryClient = new QueryClient();
+// Protected Route Component
+function ProtectedRoute({ children }: { children: React.ReactNode }) {
+  const { isAuthenticated, loading } = useAuth();
+  
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  }
+  
+  if (!isAuthenticated) {
+    return <Navigate to="/" replace />;
+  }
+  
+  return <>{children}</>;
+}
 
-const ThemeToggleButton = () => {
-  const { theme, toggleTheme } = useTheme();
+// Public Route Component
+function PublicRoute({ children }: { children: React.ReactNode }) {
+  const { isAuthenticated, loading } = useAuth();
+  
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  }
+  
+  if (isAuthenticated) {
+    return <Navigate to="/Home" replace />;
+  }
+  
+  return <>{children}</>;
+}
+
+function AppContent() {
   return (
-    <button
-      onClick={toggleTheme}
-      className="p-2 rounded-md border border-gray-300 dark:border-gray-700"
-    >
-      {theme === "light" ? "🌙 Dark" : "☀️ Light"}
-    </button>
+    <Router>
+      <Routes>
+        <Route 
+          path="/" 
+          element={
+            <PublicRoute>
+              <Index />
+            </PublicRoute>
+          } 
+        />
+        
+        <Route 
+          path="./Home" 
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          } 
+        />
+        
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
   );
-};
+}
 
-const App = () => (
-  <ThemeProvider>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <div className="min-h-screen glitter-bg flex flex-col">
-            {/* Navbar with theme toggle
-            <nav className="p-4 flex justify-end">
-              <ThemeToggleButton />
-            </nav> */}
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </div>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
-  </ThemeProvider>
-);
+function App() {
+  return (
+    <ThemeProvider> {/* Add ThemeProvider wrapper */}
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
+    </ThemeProvider>
+  );
+}
 
 export default App;
